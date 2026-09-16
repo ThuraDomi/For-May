@@ -1,0 +1,792 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+body {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+
+/* ===========================
+   MAIN SCENE
+=========================== */
+
+.scene {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            #1d0009 0%,
+            #090002 36%,
+            #020001 65%,
+            #000 100%
+        );
+}
+
+
+/* ===========================
+   BACKGROUND GLOW
+=========================== */
+
+.background-glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: #ff174f;
+
+    filter: blur(125px);
+
+    opacity: 0.13;
+
+    animation:
+        backgroundGlow
+        5s
+        ease-in-out
+        infinite alternate;
+}
+
+
+.glow-left {
+    left: -260px;
+    top: 100px;
+}
+
+
+.glow-right {
+    right: -260px;
+    top: 70px;
+}
+
+
+@keyframes backgroundGlow {
+
+    from {
+        transform: scale(0.9);
+
+        opacity: 0.10;
+    }
+
+    to {
+        transform: scale(1.15);
+
+        opacity: 0.24;
+    }
+
+}
+
+
+/* ===========================
+   CURVES
+=========================== */
+
+.trails {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 80%;
+
+    pointer-events: none;
+}
+
+
+.trail {
+    fill: none;
+
+    stroke:
+        url(#trailGradient);
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+
+    filter:
+        url(#redGlow);
+
+    stroke-dasharray:
+        8 18;
+
+    animation:
+        trailAnimation
+        9s
+        linear
+        infinite;
+}
+
+
+.trail-two {
+    opacity: 0.48;
+
+    animation-duration:
+        12s;
+}
+
+
+.trail-three {
+    animation-duration:
+        10s;
+}
+
+
+.trail-four {
+    opacity: 0.48;
+
+    animation-duration:
+        13s;
+}
+
+
+@keyframes trailAnimation {
+
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -220;
+    }
+
+}
+
+
+/* ===========================
+   HEART
+=========================== */
+
+.heart-wrapper {
+    position: absolute;
+
+    width: var(--heart-size);
+    height: var(--heart-size);
+
+    animation:
+        floatHeart
+        var(--heart-speed)
+        ease-in-out
+        infinite alternate;
+
+    animation-delay:
+        var(--heart-delay);
+
+    filter:
+        drop-shadow(
+            0 0 7px
+            rgba(255, 120, 150, 0.85)
+        )
+
+        drop-shadow(
+            0 0 20px
+            rgba(255, 25, 75, 0.50)
+        );
+}
+
+
+/* Glow */
+
+.heart-wrapper::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 15%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 70, 115, 0.25),
+            transparent 70%
+        );
+
+    animation:
+        pulseHeart
+        2.8s
+        ease-in-out
+        infinite alternate;
+}
+
+
+/* Glass heart */
+
+.glass-heart {
+    position: absolute;
+
+    width: 64%;
+    height: 64%;
+
+    left: 18%;
+    top: 20%;
+
+    transform:
+        rotate(-45deg);
+
+    border-radius:
+        16% 0 18% 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.48),
+            rgba(255,220,230,0.24) 20%,
+            rgba(255,100,140,0.21) 43%,
+            rgba(255,38,83,0.32) 70%,
+            rgba(120,0,30,0.52)
+        );
+
+    border:
+        1px solid
+        rgba(255,240,245,0.68);
+
+    box-shadow:
+
+        inset
+        4px 5px 12px
+        rgba(255,255,255,0.25),
+
+        inset
+        -5px -5px 15px
+        rgba(110,0,30,0.25),
+
+        0 0 10px
+        rgba(255,65,110,0.70);
+}
+
+
+.glass-heart::before,
+.glass-heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background: inherit;
+
+    border: inherit;
+
+    box-shadow: inherit;
+}
+
+
+.glass-heart::before {
+    left: 0;
+    top: -50%;
+}
+
+
+.glass-heart::after {
+    left: 50%;
+    top: 0;
+}
+
+
+/* Reflection shine */
+
+.heart-shine {
+    position: absolute;
+
+    left: 29%;
+    top: 17%;
+
+    width: 34%;
+    height: 15%;
+
+    z-index: 4;
+
+    border-radius: 999px;
+
+    transform:
+        rotate(-20deg);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.95),
+            rgba(255,255,255,0.05)
+        );
+
+    opacity: 0.8;
+}
+
+
+/* M/T */
+
+.heart-letter {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 8;
+
+    color: #fff;
+
+    font-size:
+        calc(
+            var(--heart-size) * 0.31
+        );
+
+    text-shadow:
+        0 0 4px white,
+        0 0 9px #ffd1dc,
+        0 0 17px #ff3366;
+}
+
+
+@keyframes floatHeart {
+
+    from {
+        transform:
+            translate3d(-5px, 7px, 0)
+            rotate(-3deg);
+    }
+
+    to {
+        transform:
+            translate3d(8px, -11px, 0)
+            rotate(3deg);
+    }
+
+}
+
+
+@keyframes pulseHeart {
+
+    from {
+        transform: scale(0.8);
+
+        opacity: 0.25;
+    }
+
+    to {
+        transform: scale(1.65);
+
+        opacity: 0.75;
+    }
+
+}
+
+
+/* ===========================
+   SPARKLES
+=========================== */
+
+.sparkle {
+    position: absolute;
+
+    width: var(--spark-size);
+    height: var(--spark-size);
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 5px white,
+        0 0 11px #ff829e,
+        0 0 20px #ff174f;
+
+    animation:
+        sparkleAnimation
+        var(--spark-speed)
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        var(--spark-delay);
+}
+
+
+.sparkle::before,
+.sparkle::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        linear-gradient(
+            transparent,
+            white,
+            transparent
+        );
+}
+
+
+.sparkle::before {
+    width: 1px;
+    height: 15px;
+}
+
+
+.sparkle::after {
+    width: 15px;
+    height: 1px;
+}
+
+
+@keyframes sparkleAnimation {
+
+    0%,
+    100% {
+        opacity: 0.12;
+
+        transform: scale(0.6);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform: scale(1.35);
+    }
+
+}
+
+
+/* ===========================
+   FLOOR
+=========================== */
+
+.floor {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 34%;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(45,0,10,0.14),
+            rgba(0,0,0,0.92)
+        );
+}
+
+
+.floor::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 8%;
+
+    width: 65%;
+    height: 2px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,70,110,0.30),
+            transparent
+        );
+
+    filter: blur(2px);
+}
+
+
+.reflection {
+    position: absolute;
+
+    width: 180px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,30,75,0.22);
+
+    filter: blur(23px);
+
+    animation:
+        floorGlow
+        4s
+        ease-in-out
+        infinite alternate;
+}
+
+
+.reflection-left {
+    left: 16%;
+    bottom: 20%;
+}
+
+
+.reflection-center {
+    left: 44%;
+    bottom: 7%;
+}
+
+
+.reflection-right {
+    right: 16%;
+    bottom: 19%;
+}
+
+
+@keyframes floorGlow {
+
+    from {
+        opacity: 0.15;
+
+        transform:
+            scaleX(0.8);
+    }
+
+    to {
+        opacity: 0.45;
+
+        transform:
+            scaleX(1.4);
+    }
+
+}
+
+
+/* ===========================
+   ENTER BUTTON
+=========================== */
+
+.enter-button {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 30;
+
+    width: 275px;
+    height: 62px;
+
+    border-radius: 999px;
+
+    border:
+        1.3px solid
+        rgba(255,255,255,0.92);
+
+    background:
+        rgba(20,0,5,0.30);
+
+    color: white;
+
+    font:
+        25px
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,0.28),
+        0 0 22px rgba(255,30,75,0.55);
+
+    animation:
+        buttonGlow
+        3s
+        ease-in-out
+        infinite;
+
+    transition:
+        transform
+        0.25s ease;
+}
+
+
+.enter-button::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent 25%,
+            rgba(255,255,255,0.30) 50%,
+            transparent 75%
+        );
+
+    transform:
+        translateX(-130%);
+
+    animation:
+        buttonShine
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+.enter-button span {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.arrow {
+    position: absolute !important;
+
+    right: 28px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-family: Arial;
+
+    font-size: 29px;
+}
+
+
+.enter-button:hover {
+    transform:
+        translateX(-50%)
+        scale(1.04);
+}
+
+
+@keyframes buttonGlow {
+
+    50% {
+        box-shadow:
+            0 0 12px rgba(255,255,255,0.50),
+            0 0 32px rgba(255,30,75,0.85);
+    }
+
+}
+
+
+@keyframes buttonShine {
+
+    0%,
+    65% {
+        transform:
+            translateX(-130%);
+    }
+
+    85%,
+    100% {
+        transform:
+            translateX(130%);
+    }
+
+}
+
+
+/* ===========================
+   TRANSITION
+=========================== */
+
+.page-transition {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            #440012,
+            #000 70%
+        );
+
+    transition:
+        opacity
+        0.8s ease;
+}
+
+
+.page-transition.active {
+    opacity: 1;
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width: 700px) {
+
+    .enter-button {
+        width: 215px;
+        height: 54px;
+
+        font-size: 21px;
+
+        bottom: 7%;
+    }
+
+    .arrow {
+        font-size: 24px;
+
+        right: 22px;
+    }
+
+    .heart-wrapper {
+        scale: 0.86;
+    }
+
+}

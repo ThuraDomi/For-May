@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For May ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="scene">
+
+        <!-- Background glow -->
+        <div class="background-glow glow-left"></div>
+        <div class="background-glow glow-right"></div>
+
+
+        <!-- Curved glowing trails -->
+        <svg
+            class="trails"
+            viewBox="0 0 1000 700"
+            preserveAspectRatio="none"
+        >
+
+            <defs>
+
+                <filter id="redGlow">
+
+                    <feGaussianBlur
+                        stdDeviation="3"
+                        result="blur"
+                    />
+
+                    <feMerge>
+
+                        <feMergeNode in="blur" />
+
+                        <feMergeNode in="SourceGraphic" />
+
+                    </feMerge>
+
+                </filter>
+
+
+                <linearGradient
+                    id="trailGradient"
+                    x1="0"
+                    x2="1"
+                >
+
+                    <stop
+                        offset="0%"
+                        stop-color="#ff174f"
+                        stop-opacity="0"
+                    />
+
+                    <stop
+                        offset="40%"
+                        stop-color="#ff426c"
+                    />
+
+                    <stop
+                        offset="70%"
+                        stop-color="#ffd0da"
+                    />
+
+                    <stop
+                        offset="100%"
+                        stop-color="#ff174f"
+                        stop-opacity="0"
+                    />
+
+                </linearGradient>
+
+            </defs>
+
+
+            <!-- Left curves -->
+
+            <path
+                class="trail trail-one"
+                d="
+                M -100 130
+                C 70 100,
+                  290 230,
+                  160 390
+                C 90 490,
+                  260 570,
+                  440 480
+                "
+            />
+
+            <path
+                class="trail trail-two"
+                d="
+                M -100 250
+                C 130 150,
+                  330 320,
+                  170 450
+                C 100 510,
+                  260 590,
+                  430 520
+                "
+            />
+
+
+            <!-- Right curves -->
+
+            <path
+                class="trail trail-three"
+                d="
+                M 1100 120
+                C 900 90,
+                  720 230,
+                  840 380
+                C 920 480,
+                  760 570,
+                  570 480
+                "
+            />
+
+            <path
+                class="trail trail-four"
+                d="
+                M 1100 240
+                C 850 150,
+                  680 310,
+                  830 445
+                C 900 520,
+                  750 600,
+                  580 520
+                "
+            />
+
+        </svg>
+
+
+        <!-- Hearts are created by JavaScript -->
+        <div id="heartContainer"></div>
+
+
+        <!-- Sparkles -->
+        <div id="sparkleContainer"></div>
+
+
+        <!-- Bottom reflection -->
+        <div class="floor">
+
+            <div class="reflection reflection-left"></div>
+
+            <div class="reflection reflection-center"></div>
+
+            <div class="reflection reflection-right"></div>
+
+        </div>
+
+
+        <!-- Enter -->
+        <button
+            class="enter-button"
+            id="enterButton"
+        >
+
+            <span>Enter</span>
+
+            <span class="arrow">→</span>
+
+        </button>
+
+
+        <!-- Transition -->
+        <div
+            class="page-transition"
+            id="pageTransition"
+        ></div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

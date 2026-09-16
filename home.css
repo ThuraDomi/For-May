@@ -1,0 +1,1096 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    background: #050001;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
+
+
+/* ===========================
+   PAGE
+=========================== */
+
+.letter-page {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(circle at 50% 35%,
+            #33000f 0%,
+            #140006 38%,
+            #050001 70%,
+            #000 100%);
+}
+
+
+/* ===========================
+   BACKGROUND GLOW
+=========================== */
+
+.background-light {
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 25, 80, 0.13);
+
+    filter: blur(135px);
+
+    animation:
+        backgroundPulse 5s ease-in-out infinite alternate;
+}
+
+
+@keyframes backgroundPulse {
+
+    from {
+        opacity: 0.30;
+
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 0.72;
+
+        transform: scale(1.15);
+    }
+
+}
+
+
+/* ===========================
+   TITLE
+=========================== */
+
+.page-title {
+    position: absolute;
+
+    top: 6%;
+
+    width: 100%;
+
+    text-align: center;
+
+    color: white;
+
+    z-index: 30;
+
+    pointer-events: none;
+}
+
+
+.page-title h1 {
+    font-weight: 400;
+
+    font-size:
+        clamp(30px,
+            4vw,
+            52px);
+
+    text-shadow:
+        0 0 12px rgba(255, 110, 145, 0.75);
+}
+
+
+.page-title p {
+    margin-top: 6px;
+
+    letter-spacing: 5px;
+
+    font-size: 14px;
+
+    color:
+        rgba(255, 255, 255, 0.55);
+}
+
+
+/* ===========================
+   BACKGROUND HEARTS
+=========================== */
+
+.background-heart {
+    position: absolute;
+
+    color:
+        rgba(255, 60, 100, 0.35);
+
+    text-shadow:
+        0 0 15px rgba(255, 30, 80, 0.60);
+
+    animation:
+        backgroundHeartFloat 4s ease-in-out infinite alternate;
+}
+
+
+.heart-a {
+    left: 8%;
+    top: 22%;
+
+    font-size: 28px;
+}
+
+
+.heart-b {
+    left: 18%;
+    bottom: 18%;
+
+    font-size: 18px;
+
+    animation-delay: -1s;
+}
+
+
+.heart-c {
+    right: 8%;
+    top: 28%;
+
+    font-size: 28px;
+
+    animation-delay: -2s;
+}
+
+
+.heart-d {
+    right: 18%;
+    bottom: 18%;
+
+    font-size: 18px;
+
+    animation-delay: -0.5s;
+}
+
+
+@keyframes backgroundHeartFloat {
+
+    from {
+        transform:
+            translateY(8px);
+
+        opacity: 0.25;
+    }
+
+    to {
+        transform:
+            translateY(-14px);
+
+        opacity: 0.70;
+    }
+
+}
+
+
+/* ===========================
+   LETTER AREA
+=========================== */
+
+.letter-area {
+    position: relative;
+
+    width: 720px;
+    height: 590px;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    z-index: 10;
+}
+
+
+/* ===========================
+   ENVELOPE
+=========================== */
+
+.envelope {
+    position: relative;
+
+    width: 390px;
+    height: 245px;
+
+    margin-bottom: 50px;
+
+    perspective: 1100px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.envelope:not(.open):hover {
+    transform:
+        translateY(-5px) scale(1.015);
+}
+
+
+/* Back */
+
+.envelope-back {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(145deg,
+            #ff809b,
+            #cf234e);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.55),
+
+        0 0 28px rgba(255, 30, 80, 0.35);
+}
+
+
+/* ===========================
+   PAPER
+=========================== */
+
+.letter-paper {
+    position: absolute;
+
+    left: 50%;
+    bottom: 18px;
+
+    width: 340px;
+    height: 420px;
+
+    transform:
+        translateX(-50%) translateY(220px);
+
+    z-index: 2;
+
+    opacity: 0;
+
+    padding:
+        36px 30px 42px;
+
+    border-radius:
+        12px;
+
+    color:
+        #5b1b2d;
+
+    background:
+        linear-gradient(145deg,
+            #fffaf6,
+            #ffeef2);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.35),
+
+        0 0 20px rgba(255, 180, 195, 0.18);
+
+
+    /*
+       THIS FIXES YOUR SCROLLING
+    */
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+
+    overscroll-behavior: contain;
+
+    touch-action: pan-y;
+
+    pointer-events: none;
+
+
+    transition:
+        transform 1.15s cubic-bezier(0.2,
+            0.8,
+            0.2,
+            1),
+
+        opacity 0.4s ease;
+}
+
+
+/* Notebook style lines */
+
+.letter-paper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(to bottom,
+            transparent,
+            transparent 31px,
+            rgba(185, 100, 120, 0.09) 32px);
+}
+
+
+/* Scrollbar */
+
+.letter-paper::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.letter-paper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.letter-paper::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+
+    background:
+        rgba(207, 45, 88, 0.55);
+}
+
+
+.letter-paper::-webkit-scrollbar-thumb:hover {
+    background:
+        rgba(230, 45, 95, 0.85);
+}
+
+
+/* Firefox */
+
+.letter-paper {
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(207, 45, 88, 0.6) transparent;
+}
+
+
+/* ===========================
+   LETTER CONTENT
+=========================== */
+
+.letter-heading {
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 18px;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 29px;
+
+    font-weight: 500;
+
+    color: #c02450;
+
+    opacity: 0;
+
+    transform:
+        translateY(8px);
+
+    transition:
+        0.5s ease;
+}
+
+
+.letter-heading.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+.letter-text {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 230px;
+
+    font-family:
+        "Segoe Print",
+        "Comic Sans MS",
+        cursive;
+
+    font-size: 16px;
+
+    line-height: 1.72;
+
+    letter-spacing: 0.1px;
+}
+
+
+.signature {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 22px;
+
+    padding-bottom: 20px;
+
+    text-align: right;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 25px;
+
+    color: #c02450;
+
+    opacity: 0;
+
+    transform:
+        translateY(10px);
+
+    transition:
+        0.8s ease;
+}
+
+
+.signature.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* ===========================
+   ENVELOPE FRONT
+=========================== */
+
+.envelope-front {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    pointer-events: none;
+}
+
+
+/* left */
+
+.envelope-front::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        195px solid #ef456d;
+
+    border-top:
+        122px solid transparent;
+
+    border-bottom:
+        123px solid #ef456d;
+}
+
+
+/* right */
+
+.envelope-front::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-right:
+        195px solid #d83260;
+
+    border-top:
+        122px solid transparent;
+
+    border-bottom:
+        123px solid #d83260;
+}
+
+
+/* bottom */
+
+.bottom-fold {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    z-index: 6;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        195px solid transparent;
+
+    border-right:
+        195px solid transparent;
+
+    border-bottom:
+        150px solid #f15a7c;
+
+    pointer-events: none;
+}
+
+
+/* ===========================
+   FLAP
+=========================== */
+
+.envelope-flap {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    z-index: 8;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        195px solid transparent;
+
+    border-right:
+        195px solid transparent;
+
+    border-top:
+        145px solid #ff7995;
+
+    transform-origin:
+        top center;
+
+    transform:
+        rotateX(0deg);
+
+    transition:
+        transform 0.8s cubic-bezier(0.55,
+            0.05,
+            0.25,
+            1);
+
+    pointer-events: none;
+}
+
+
+/* ===========================
+   SEAL
+=========================== */
+
+.heart-seal {
+    position: absolute;
+
+    left: 50%;
+    top: 87px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 10;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    color: white;
+
+    font-size: 26px;
+
+    background:
+        radial-gradient(circle at 35% 30%,
+            #ff7998,
+            #bd123f 76%);
+
+    box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.2),
+
+        0 0 18px rgba(255, 25, 80, 0.65);
+
+    pointer-events: none;
+
+    transition:
+        0.45s ease;
+}
+
+
+/* ===========================
+   OPEN ENVELOPE
+=========================== */
+
+.envelope.open {
+    cursor: default;
+}
+
+
+.envelope.open .envelope-flap {
+    transform:
+        rotateX(180deg);
+
+    z-index: 0;
+}
+
+
+.envelope.open .heart-seal {
+    opacity: 0;
+
+    transform:
+        translateX(-50%) scale(0.4);
+}
+
+
+.envelope.open .letter-paper {
+    opacity: 1;
+
+    pointer-events: auto;
+
+    z-index: 9;
+
+    transform:
+        translateX(-50%) translateY(-160px);
+}
+
+
+/* ===========================
+   TAP MESSAGE
+=========================== */
+
+.tap-message {
+    position: absolute;
+
+    left: 50%;
+    bottom: 5px;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        rgba(255, 255, 255, 0.68);
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+
+    animation:
+        tapPulse 1.7s ease-in-out infinite;
+
+    transition:
+        opacity 0.4s ease;
+}
+
+
+.tap-message.hide {
+    opacity: 0;
+}
+
+
+@keyframes tapPulse {
+
+    50% {
+        opacity: 0.35;
+    }
+
+}
+
+
+/* ===========================
+   HEART NOTES
+=========================== */
+
+.heart-note {
+    position: absolute;
+
+    width: 80px;
+    height: 72px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+
+    transform:
+        scale(0.4);
+
+    transition:
+        opacity 0.7s ease,
+
+        transform 0.7s cubic-bezier(0.2,
+            0.8,
+            0.2,
+            1);
+
+    filter:
+        drop-shadow(0 0 11px rgba(255, 35, 80, 0.8));
+}
+
+
+.heart-note::before {
+    content: "♥";
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: -1;
+
+    color: #eb3f69;
+
+    font-size: 85px;
+
+    text-shadow:
+        0 0 18px rgba(255, 30, 80, 0.75);
+}
+
+
+.heart-note span {
+    position: relative;
+
+    z-index: 2;
+
+    color: white;
+
+    font-family:
+        "Segoe Print",
+        cursive;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    line-height: 1.3;
+}
+
+
+.note-one {
+    left: 4%;
+    top: 23%;
+}
+
+
+.note-two {
+    right: 4%;
+    top: 24%;
+}
+
+
+.note-three {
+    left: 2%;
+    top: 62%;
+}
+
+
+.note-four {
+    right: 2%;
+    top: 62%;
+}
+
+
+.letter-area.opened .heart-note {
+    opacity: 1;
+
+    transform:
+        scale(1);
+
+    animation:
+        noteFloat 3s ease-in-out infinite alternate;
+}
+
+
+.note-two {
+    transition-delay:
+        0.2s;
+}
+
+
+.note-three {
+    transition-delay:
+        0.4s;
+}
+
+
+.note-four {
+    transition-delay:
+        0.6s;
+}
+
+
+@keyframes noteFloat {
+
+    from {
+        translate: 0 5px;
+
+        rotate: -3deg;
+    }
+
+    to {
+        translate: 0 -8px;
+
+        rotate: 3deg;
+    }
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width: 700px) {
+
+    .page-title {
+        top: 3%;
+    }
+
+
+    .page-title h1 {
+        font-size: 29px;
+    }
+
+
+    .letter-area {
+        width: 100%;
+        height: 540px;
+    }
+
+
+    .envelope {
+        width: 310px;
+        height: 195px;
+
+        margin-bottom: 42px;
+    }
+
+
+    .letter-paper {
+        width: 278px;
+        height: 380px;
+
+        padding:
+            28px 22px 35px;
+    }
+
+
+    .letter-text {
+        font-size: 14px;
+
+        line-height: 1.65;
+    }
+
+
+    .letter-heading {
+        font-size: 25px;
+    }
+
+
+    .signature {
+        font-size: 22px;
+    }
+
+
+    .envelope-front::before {
+        border-left-width:
+            155px;
+
+        border-top-width:
+            98px;
+
+        border-bottom-width:
+            97px;
+    }
+
+
+    .envelope-front::after {
+        border-right-width:
+            155px;
+
+        border-top-width:
+            98px;
+
+        border-bottom-width:
+            97px;
+    }
+
+
+    .bottom-fold {
+        border-left-width:
+            155px;
+
+        border-right-width:
+            155px;
+
+        border-bottom-width:
+            120px;
+    }
+
+
+    .envelope-flap {
+        border-left-width:
+            155px;
+
+        border-right-width:
+            155px;
+
+        border-top-width:
+            115px;
+    }
+
+
+    .heart-seal {
+        width: 48px;
+        height: 48px;
+
+        top: 66px;
+    }
+
+
+    .envelope.open .letter-paper {
+        transform:
+            translateX(-50%) translateY(-178px);
+    }
+
+
+    .heart-note {
+        width: 58px;
+        height: 55px;
+    }
+
+
+    .heart-note::before {
+        font-size: 63px;
+    }
+
+
+    .heart-note span {
+        font-size: 8px;
+    }
+
+
+    .note-one {
+        left: 1%;
+        top: 22%;
+    }
+
+
+    .note-two {
+        right: 1%;
+        top: 22%;
+    }
+
+
+    .note-three {
+        left: 1%;
+        top: 70%;
+    }
+
+
+    .note-four {
+        right: 1%;
+        top: 70%;
+    }
+
+}
+
+.next-page-button {
+    display: block;
+    margin: 22px auto 8px;
+    padding: 12px 24px;
+    border: 1px solid rgba(210, 45, 90, 0.35);
+    border-radius: 999px;
+    background: rgba(255, 245, 248, 0.65);
+    color: #b21f4a;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: 0.5s ease;
+}
+
+.next-page-button.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.next-page-button:hover {
+    background: rgba(255, 240, 245, 0.95);
+}
